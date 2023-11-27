@@ -11,13 +11,17 @@ Para resolver sistemas de ecuaciones no lineales:
 - Método del punto fijo
 - Método de Newton
 - Método de Biseccion
+  
 Para calcular el área bajo la curva de una función:
-- Integracion numérica 
+- Integracion numérica
+  
 Para estimar la derivada de una función en un puntoespecífico:
-- Diferenciación numérica 
+- Diferenciación numérica
+  
 Para resolver sistemas de ecuaciones lineales:
 - Método de Gauss-Seidel
 - Método de Gauss-Jacobi
+  
 Para interpolación numérica: 
 - Polinomio de Lagrange con eliminacion de Gauss-Jordan
 - Polinomio de Lagrange por método directo
