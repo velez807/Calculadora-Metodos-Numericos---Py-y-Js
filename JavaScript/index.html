@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Numéricos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
+</head>
+
+<body>
+    <h1 id="toggleButton">Temas</h1>
+    <aside>
+        <ul>
+            <li onclick="mostrarDiv('inicio')">Inicio</li>
+            <li onclick="mostrarDiv('Punto-Fijo')">Método del Punto fijo</li>
+            <li onclick="mostrarDiv('Newton')">Método de Newton</li>
+            <li onclick="mostrarDiv('Biseccion')">Método de Bisección</li>
+            <li onclick="mostrarDiv('integracion')">integración numérica</li>
+            <li onclick="mostrarDiv('derivacion')">Derivación numérica</li>
+            <li onclick="mostrarDiv('Gauss-Seidel')">Método de Gauss-Seidel</li>
+            <li onclick="mostrarDiv('Gauss-Jacobi')">Método de Gauss-Jacobi</li>
+            <li onclick="mostrarDiv('Lagrange-Gauss-Jordan')">Polinomio de Lagrange con eliminación de Gauss Jordan</li>
+            <li onclick="mostrarDiv('Lagrange-directo')">Polinomio de Lagrange por método directo</li>
+        </ul>
+    </aside>
+    <div id="inicio" class="divs">
+        <h1>Métodos Numéricos</h1>
+        <h1>Juan Sebastián Vélez</h1>
+        <h2>Universidad libre</h2>
+        <h3>Pereira, Colombia</h3>
+        <h3>11/2023</h3>
+    </div>
+
+    <div id="Punto-Fijo" class="divs" style="display: none;">
+        <h1>Método del Punto fijo</h1>
+        <p class="explicacion">
+            El método del punto fijo es una técnica iterativa utilizada para encontrar soluciones de ecuaciones no
+            lineales.
+            Se basa en transformar la ecuación original en una forma equivalente g(x) = x, donde g(x) es una función
+            conocida
+            como la función de iteración. En cada iteración, se toma un valor inicial X0 y se actualiza sucesivamente
+            mediante
+            Xn+1 = g(Xn) hasta que la secuencia converge a un punto fijo de g(x). El método es ampliamente utilizado en
+            análisis
+            numérico y tiene aplicaciones en la resolución de ecuaciones no lineales en diversas disciplinas científicas
+            e ingenieriles.
+
+            <textarea name="log" id="logs-punto-fijo" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="ecuacion-punto-fijo">Ingrese la función despejada F(x): </label>
+            <input type="text" id="ecuacion-punto-fijo">
+
+            <label for="valorInicial-punto-fijo">Ingrese el valor inicial X0: </label>
+            <input type="number" id="valorInicial-punto-fijo">
+
+            <button onclick="puntoFijo()">Calcular</button>
+
+            <div id="resultado-punto-fijo" class="resultado"></div>
+            <div id="plot-punto-fijo"></div>
+        </div>
+    </div>
+
+    <div id="Newton" class="divs" style="display: none;">
+        <h1>Método de Newton-Raphson</h1>
+        <p class="explicacion">
+            El método de Newton-Raphson es una técnica iterativa utilizada para encontrar soluciones de ecuaciones no
+            lineales.
+            Se basa en la idea de aproximar la función por su tangente en el punto actual, y luego encontrar la
+            intersección
+            con el eje x de la tangente para obtener el siguiente punto de iteración.
+
+            <textarea name="log" id="logs-newton" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="ecuacion-newton">Ingrese la función F(x): </label>
+            <input type="text" id="ecuacion-newton">
+
+            <label for="derivada-newton">Ingrese la derivada de la función F'(x): </label>
+            <input type="text" id="derivada-newton">
+
+            <label for="valorInicial-newton">Ingrese el valor inicial X0: </label>
+            <input type="number" id="valorInicial-newton">
+
+            <button onclick="newton()">Calcular</button>
+
+            <div id="resultado-newton" class="resultado"></div>
+            <div id="plot-newton"></div>
+        </div>
+    </div>
+
+    <div id="Biseccion" class="divs" style="display: none;">
+        <h1>Método de Bisección</h1>
+        <p class="explicacion">
+            El método de bisección es un algoritmo que encuentra las raíces de una ecuación no lineal al dividir
+            repetidamente un intervalo y seleccionar el subintervalo en el que cambia de signo.
+            <textarea name="logs" id="logs-biseccion" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="ecuacion-biseccion">Ingrese la función: </label>
+            <input type="text" id="ecuacion-biseccion">
+
+            <label for="xa-biseccion">Ingrese el valor de Xa: </label>
+            <input type="number" id="xa-biseccion">
+
+            <label for="xb-biseccion">Ingrese el valor de Xb: </label>
+            <input type="number" id="xb-biseccion">
+
+            <button onclick="biseccion()">Calcular</button>
+
+            <div id="resultado-biseccion" class="resultado"></div>
+            <div id="plot-biseccion"></div>
+        </div>
+    </div>
+
+    <div id="integracion" class="divs" style="display: none;">
+        <h1>integración numérica</h1>
+
+        <p class="explicacion">
+            La integración numérica es un método para calcular el valor numérico de una integral definida. La
+            integración numérica
+            es ampliamente utilizada en el análisis numérico y en el cálculo de áreas y volúmenes de regiones e
+            hipervolúmenes, aqupi la usamos para calcular el área bajo la curva.
+            <textarea name="logs" id="logs-integracion" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="ecuacion-integracion">Ingrese la función F(x): </label>
+            <input type="text" id="ecuacion-integracion">
+
+            <label for="xa-integracion">Ingrese el límite infeior: </label>
+            <input type="number" id="xa-integracion">
+
+            <label for="xb-integracion">Ingrese el límite superior: </label>
+            <input type="number" id="xb-integracion">
+
+            <label for="n-integracion">Ingrese la cantidad de iteraciones: </label>
+            <input type="number" id="n-integracion">
+
+            <button onclick="integracion()">Calcular</button>
+
+            <div id="resultado-integracion" class="resultado"></div>
+            <div id="plot-integracion"></div>
+        </div>
+
+    </div>
+
+    <div id="derivacion" class="divs" style="display: none;">
+        <h1>Derivación numérica</h1>
+
+        <p class="explicacion">
+            La derivación numérica es un método de diferenciación numérica para encontrar la pendiente de una curva
+            en un punto dado. La diferenciación numérica es una técnica que se utiliza para aproximar la derivada de
+            una función en un punto específico mediante diferencias finitas.
+            <textarea name="logs" id="logs-derivacion" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="ecuacion-derivacion">Ingrese la función F(x): </label>
+            <input type="text" id="ecuacion-derivacion">
+
+            <label for="xa-derivacion">Ingrese el valor de X0: </label>
+            <input type="number" id="x-derivacion">
+
+            <label for="h-derivacion">Ingrese el valor de h: </label>
+            <input type="number" id="h-derivacion">
+
+            <button onclick="derivacion()">Calcular</button>
+
+            <div id="resultado-derivacion" class="resultado"></div>
+            <div id="plot-derivacion"></div>
+        </div>
+    </div>
+
+    <div id="Gauss-Seidel" class="divs" style="display: none;">
+        <h1>Método de Gauss-Seidel</h1>
+
+        <p class="explicacion">
+            El método de Gauss-Seidel es un algoritmo iterativo utilizado para resolver sistemas de ecuaciones lineales.
+            Este método pertenece a la categoría de métodos iterativos para la solución de sistemas lineales y se
+            utiliza para encontrar soluciones aproximadas en lugar de soluciones exactas.
+            <textarea name="logs" id="logs-gauss-seidel" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+
+            <label for="ecuacion1-gauss">Ingrese la función x = : </label>
+            <input type="text" id="ecuacion1-gauss">
+
+            <label for="ecuacion2-gauss">Ingrese la función y = : </label>
+            <input type="text" id="ecuacion2-gauss">
+
+            <label for="valorInicialX-gauss">Ingrese el valor inicial de X: </label>
+            <input type="number" id="valorInicialX-gauss">
+
+            <label for="valorInicialY-gauss">Ingrese el valor inicial de Y: </label>
+            <input type="number" id="valorInicialY-gauss">
+
+            <button onclick="gauss_seidel()">Calcular</button>
+
+            <div id="resultado-gauss-seidel" class="resultado"></div>
+            <div id="plot-gauss-seidel"></div>
+        </div>
+    </div>
+
+    <div id="Gauss-Jacobi" class="divs" style="display: none;">
+        <h1>Método de Gauss-Jacobi</h1>
+
+        <p class="explicacion">
+            El método de Gauss-Jacobi es un algoritmo iterativo utilizado para resolver sistemas de ecuaciones
+            lineales. Al igual que Gauss-Seidel, este método pertenece a la categoría de métodos iterativos para la
+            solución de sistemas lineales y se utiliza para encontrar soluciones aproximadas en lugar de soluciones
+            exactas.
+            <textarea name="logs" id="logs-jacobi" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+
+            <label for="ecuacion1-jacobi">Ingrese la función 1 x = : </label>
+            <input type="text" id="ecuacion1-jacobi">
+
+            <label for="ecuacion2-jacobi">Ingrese la función 2 y = : </label>
+            <input type="text" id="ecuacion2-jacobi">
+
+            <label for="valorInicialX-jacobi">Ingrese el valor inicial de X: </label>
+            <input type="number" id="valorInicialX-jacobi">
+
+            <label for="valorInicialY-jacobi">Ingrese el valor inicial de Y: </label>
+            <input type="number" id="valorInicialY-jacobi">
+
+            <button onclick="gauss_jacobi()">Calcular</button>
+
+            <div id="resultado-jacobi" class="resultado"></div>
+            <div id="plot-jacobi"></div>
+        </div>
+    </div>
+
+    <div id="Lagrange-Gauss-Jordan" class="divs" style="display: none;">
+        <h1>Polinomio de Lagrange con eliminación de Gauss-Jordan</h1>
+
+        <p class="explicacion">
+            El Polinomio de Lagrange con eliminación de Gauss-Jordan se utiliza para encontrar un polinomio interpolante
+            que pase exactamente por un conjunto dado de puntos. Este método combina el polinomio de Lagrange y el
+            proceso de eliminación de Gauss-Jordan para encontrar los coeficientes del polinomio.
+            <textarea name="logs" id="logs-lagrange" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="numDatos-lagrange">Ingrese la cantidad de datos: </label>
+            <input type="number" id="numDatos-lagrange">
+
+            <button onclick="Iniciarlagrange(0)">Iniciar</button>
+            
+            <div id="inputs-container-lagrange"></div>
+
+            <div id="resultado-lagrange" class="resultado"></div>
+
+            <div id="matriz-container"></div>
+            
+        </div>
+    </div>
+
+    <div id="Lagrange-directo" class="divs" style="display: none;">
+        <h1>Polinomio de Lagrange por método directo</h1>
+
+        <p class="explicacion">
+            El Polinomio de Lagrange por método directo se utiliza para encontrar un polinomio interpolante que pase
+            exactamente por un conjunto dado de puntos. Este método utiliza la fórmula de Lagrange para encontrar los
+            coeficientes del polinomio.
+            <textarea name="logs" id="logs-lagrange-directo" cols="30" rows="10" readonly></textarea>
+        </p>
+
+        <div class="algoritmo">
+            <label for="numDatos-lagrange-directo">Ingrese la cantidad de datos: </label>
+            <input type="number" id="numDatos-lagrange-directo">
+
+            <button onclick="Iniciarlagrange(1)">Iniciar</button>
+
+            <div id="inputs-container-lagrange-directo"></div>
+            
+
+            <div id="resultado-lagrange-directo" class="resultado"></div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="calculos.js"></script>
+</body>
+
+</html>
